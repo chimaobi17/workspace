@@ -3,25 +3,25 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Eloquent\Factories\Sequence;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Create admin user
+        User::factory()->admin()->create([
+            'name' => 'Admin',
+            'email' => 'admin@xpert.test',
+        ]);
 
+        // Create test user (free plan)
         User::factory()->create([
             'name' => 'Test User',
-            'email' => 'test@example.com',
+            'email' => 'user@xpert.test',
         ]);
-        $this->call(JobSeeder::class);
+
+        // Seed AI agents with their prompt templates
+        $this->call(AiAgentSeeder::class);
     }
 }

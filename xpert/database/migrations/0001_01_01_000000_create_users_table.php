@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('role')->default('user'); // user or admin (no enum in SQLite)
+            $table->string('plan_level')->default('free'); // free, standard, or premium
             $table->rememberToken();
             $table->timestamps();
         });
